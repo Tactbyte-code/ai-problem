@@ -1,0 +1,267 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f9f9f9;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    color: #213547;
+}
+
+.ara-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    color: #213547;
+}
+
+.ara-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.ara-header h1 {
+    font-size: 2rem;
+    color: #213547;
+    margin-bottom: 0.5rem;
+}
+
+.ara-search-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 1rem;
+}
+
+.ara-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.ara-field-inline {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.ara-field label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.ara-field input[type="text"],
+.ara-field input[type="url"],
+.ara-field input[type="password"] {
+    padding: 12px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: #fff;
+    color: #213547;
+}
+
+.ara-field input[type="text"]:focus,
+.ara-field input[type="url"]:focus,
+.ara-field input[type="password"]:focus {
+    outline: 2px solid #646cff;
+    border-color: #646cff;
+}
+
+.ara-btn {
+    padding: 12px 24px;
+    background-color: #646cff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 400px;
+    transition: background-color 0.2s;
+}
+
+.ara-btn:hover:not(:disabled) {
+    background-color: #535bf2;
+}
+
+.ara-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.ara-error {
+    text-align: center;
+    color: #ef4444;
+    background: #fee2e2;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+@keyframes ara-pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.ara-spinner {
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    color: #646cff;
+    animation: ara-pulse 1.5s infinite;
+}
+
+.ara-dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.ara-card {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+}
+
+.ara-card h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #f3f4f6;
+    padding-bottom: 0.5rem;
+    font-size: 1.5rem;
+    color: #213547;
+}
+
+.ara-summary-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #374151;
+}
+
+.ara-action-list {
+    list-style: none;
+    padding: 0;
+    color: #4b5563;
+}
+
+.ara-action-list li {
+    padding: 1rem;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ara-action-list li:last-child {
+    border-bottom: none;
+}
+
+.ara-pain-section h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid #f3f4f6;
+    padding-bottom: 0.5rem;
+    font-size: 1.5rem;
+    color: #213547;
+}
+
+.ara-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.ara-point-card {
+    background: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+    border-left: 5px solid #ccc;
+}
+
+.ara-point-card.high {
+    border-left-color: #ef4444;
+}
+.ara-point-card.medium {
+    border-left-color: #f59e0b;
+}
+.ara-point-card.low {
+    border-left-color: #10b981;
+}
+
+.ara-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 8px;
+}
+
+.ara-issue-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #213547;
+}
+
+.ara-badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    white-space: nowrap;
+}
+
+.ara-badge.high {
+    background-color: #ef4444;
+}
+.ara-badge.medium {
+    background-color: #f59e0b;
+}
+.ara-badge.low {
+    background-color: #10b981;
+}
+
+.ara-quote-box {
+    background-color: #f3f4f6;
+    padding: 1rem;
+    border-radius: 8px;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #4b5563;
+}
+
+.ara-quote-box p {
+    margin: 0;
+}
+
+.ara-details-text {
+    color: #374151;
+    line-height: 1.7;
+    font-size: 1rem;
+}
