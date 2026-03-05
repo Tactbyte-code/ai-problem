@@ -308,13 +308,13 @@ function SearchPage({ onSubmit, onFetch, submitLoading, fetchLoading, error }) {
             </div>
 
             <div className="ara-form-footer">
-              <label className="ara-checkbox-label">
+              {/* <label className="ara-checkbox-label">
                 <input type="checkbox" checked={testMode}
                   onChange={e => setTestMode(e.target.checked)} className="ara-checkbox" />
                 <span className="ara-checkbox-box">{testMode && "✓"}</span>
                 <span>Test mode</span>
                 <span className="ara-checkbox-hint">Uses cached data, skips live fetch</span>
-              </label>
+              </label> */}
               <button type="submit" className="ara-btn" disabled={submitLoading}>
                 {submitLoading
                   ? <span className="ara-btn-loading"><span className="ara-spinner-dot" />Analyzing…</span>
