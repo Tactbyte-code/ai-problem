@@ -8,7 +8,8 @@ function sleep(ms) {
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 function SentimentBadge({ value }) {
-  return <span className={`rr-badge rr-badge-${value?.toLowerCase()}`}>{value}</span>;
+  if (!value) return null;
+  return <span className={`rr-badge rr-badge-${value.toLowerCase()}`}>{value}</span>;
 }
 
 function RelevanceBar({ score }) {
@@ -31,7 +32,9 @@ function RelevanceBar({ score }) {
 
 function ThemeCard({ theme, index }) {
   const [open, setOpen] = useState(true);
-  const scoreMap = Object.fromEntries((theme.sources || []).map(s => [s.id, s.score || 0]));
+  const scoreMap = Object.fromEntries(
+    (theme.sources || []).map(s => [s.id, s.score ?? 0])
+  );
   return (
     <div className="rr-theme" style={{ animationDelay: `${0.1 + index * 0.1}s` }}>
       <div className="rr-theme-header">
@@ -106,7 +109,13 @@ function ThemeCard({ theme, index }) {
 }
 
 function Sidebar({ data }) {
-  const { meta, market_signals } = data;
+  const { meta, market_signals } = data || {};
+  // Normalize confidence: "Medium-High" → "High", "Medium-Low" → "Low", etc.
+  const confClass = meta?.confidence
+    ? meta.confidence.includes("High") ? "High"
+      : meta.confidence.includes("Low") ? "Low"
+      : "Medium"
+    : "";
   const sigGroups = [
     { items: market_signals?.demographic_signals || [], type: "demo",  label: "Demo" },
     { items: market_signals?.geographic_signals  || [], type: "geo",   label: "Geo" },
@@ -119,7 +128,7 @@ function Sidebar({ data }) {
         <div className="rr-meta-rows">
           <div className="rr-meta-row">
             <span className="rr-meta-key">Confidence</span>
-            <span className={`rr-conf rr-conf-${meta?.confidence}`}>{meta?.confidence}</span>
+            <span className={`rr-conf rr-conf-${confClass}`}>{meta?.confidence}</span>
           </div>
           <div className="rr-meta-row">
             <span className="rr-meta-key">Model</span>
@@ -141,6 +150,18 @@ function Sidebar({ data }) {
             <div className="rr-meta-row">
               <span className="rr-meta-key">Posts Analyzed</span>
               <span className="rr-meta-val">{meta.total_posts}</span>
+            </div>
+          )}
+          {meta?.total_comments && (
+            <div className="rr-meta-row">
+              <span className="rr-meta-key">Comments</span>
+              <span className="rr-meta-val">{meta.total_comments}</span>
+            </div>
+          )}
+          {meta?.date_range && (
+            <div className="rr-meta-row">
+              <span className="rr-meta-key">Date Range</span>
+              <span className="rr-meta-val rr-mono" style={{ fontSize: 11 }}>{meta.date_range}</span>
             </div>
           )}
           {meta?.caveats && (
@@ -366,6 +387,7 @@ function LoadingScreen({ status }) {
 
 // ─── Results View ─────────────────────────────────────────────────────────────
 function ResultsView({ data, onReset }) {
+  if (!data) return null;
   const d = data;
   const analyzedDate = d.analyzed_at ? new Date(d.analyzed_at) : new Date();
   return (
@@ -484,7 +506,7 @@ export default function App() {
         setStatus(statusData.status);
         if (statusData.status === "FAILED") throw new Error("Job failed on the server");
         if (statusData.output) {
-          setData(statusData.output);
+          setData(statusData.output.body);
           setPhase("results");
           break;
         }
@@ -514,7 +536,7 @@ export default function App() {
           : "No output found for this Job ID"
       );
 
-      setData(statusData.output);
+      setData(statusData.output.body);
       setPhase("results");
     } catch (err) {
       setError(err.message);
