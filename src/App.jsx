@@ -211,11 +211,11 @@ function SearchPage({ onSubmit, onFetch, submitLoading, fetchLoading, error }) {
   const [query, setQuery]             = useState("");
   const [apiKey, setApiKey]           = useState("");
   const [apiUrl, setApiUrl]           = useState("");
-  const [fetchAfter, setFetchAfter]   = useState("2025-01-01");
+  const [fetchAfter, setFetchAfter]   = useState("");
   const [maxComments, setMaxComments] = useState(50);
   const [numResults, setNumResults]   = useState(25);
   const [provider, setProvider]       = useState("hf");
-  const [model, setModel]             = useState("Qwen/Qwen3-8B");
+  const [model, setModel]             = useState("");
   const [testMode, setTestMode]       = useState(false);
 
   // Job lookup state
